@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import {afk as AwayFromKeyboard} from '../../apis/afkClients';
 
 @Component({
@@ -6,38 +8,59 @@ import {afk as AwayFromKeyboard} from '../../apis/afkClients';
   templateUrl: './entity-view.component.html',
   styleUrls: ['./entity-view.component.sass']
 })
-export class EntityViewComponent implements OnInit {
+export class EntityViewComponent implements OnInit, OnDestroy{
 
-  @Input() entityId? : string = undefined;
-  template : AwayFromKeyboard.Template | null = null;
+  @Input() templateId? : string;
+  @Input() entityId? : string;
+  templateValue : string = "";
   generatedCode : string = "";
+  private modelChanged: Subject<string> = new Subject<string>();
+  private subscription?: Subscription;
+  debounceTime = 500;
 
   constructor(
     private templatesClient: AwayFromKeyboard.TemplatesClient,
     private entitiesclient: AwayFromKeyboard.EntitiesClient){ 
-    }
+  }
 
   ngOnInit(): void {
-    this.templatesClient.getById(this.entityId!).subscribe(t => 
+
+    // Delay execution when model changed
+    this.subscription = this.modelChanged
+      .pipe(
+        debounceTime(this.debounceTime),
+      )
+      .subscribe(value => {
+        this.onTemplateChangedDelayed(value);
+      });
+
+    this.templatesClient.getById(this.templateId!).subscribe(t => 
       {
-        this.onTemplateUpdated(t!);
+        this.templateValue = t?.value!;
+        this.generateCode();
       });
   }
 
-  onTemplateChanged(): void {
-    console.info(event);
-    this.templatesClient.update(this.template!.id!, new AwayFromKeyboard.UpdateTemplate({
-      value: this.template?.value!
+  onTemplateChanged(): void{
+    this.modelChanged.next(this.templateValue);
+  }
+
+  onTemplateChangedDelayed(value: string): void {
+    this.templatesClient.update(this.templateId!, new AwayFromKeyboard.UpdateTemplate({
+      value: value
     })).subscribe(t => 
       {
-        this.onTemplateUpdated(t!);
+        this.generateCode();
       });
   }
 
-  onTemplateUpdated(template: AwayFromKeyboard.Template): void {
-    this.template = template;
-        this.entitiesclient.generate("10e31858-9c19-4abb-bc5b-eaebe407fbc3", this.template?.id!).subscribe(gc => {
-          this.generatedCode = gc?.value!;
-        })
+  generateCode() : void {
+    this.entitiesclient.generate(this.entityId!, this.templateId!).subscribe(gc => {
+      this.generatedCode = gc?.value!;
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }

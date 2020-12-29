@@ -1,6 +1,6 @@
-<div class="p-grid" *ngIf="template">
+<div class="p-grid" *ngIf="templateValue">
     <div class="p-col">
-        <textarea [(ngModel)]="template.value" (ngModelChange)="onTemplateChanged()" pInputTextarea rows="60" style="width: 100%;">
+        <textarea [(ngModel)]="templateValue" (ngModelChange)="onTemplateChanged()" pInputTextarea rows="60" style="width: 100%;">
         </textarea>
     </div>
     <div class="p-col">
