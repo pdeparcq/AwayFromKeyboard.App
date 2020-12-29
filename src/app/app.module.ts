@@ -9,24 +9,30 @@ import { AppComponent } from './app.component';
 import { EntityViewComponent } from './entity-view/entity-view.component';
 
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {TabViewModule} from 'primeng/tabview';
 
 import {afk as AwayFromKeyboard} from '../apis/afkClients'
 import {environment} from '../environments/environment';
 import { CodeViewComponent } from './code-view/code-view.component'
 import { HighlightService } from '../services/highlight.service';
+import { EntityTemplatesViewComponent } from './entity-templates-view/entity-templates-view.component';
+import { EntityCodeViewComponent } from './entity-code-view/entity-code-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EntityViewComponent,
-    CodeViewComponent
+    CodeViewComponent,
+    EntityTemplatesViewComponent,
+    EntityCodeViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    TabViewModule
   ],
   providers: [
     {

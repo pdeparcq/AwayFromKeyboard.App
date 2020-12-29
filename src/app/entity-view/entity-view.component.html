@@ -1,10 +1,1 @@
-<div class="p-grid" *ngIf="templateValue">
-    <div class="p-col">
-        <textarea [(ngModel)]="templateValue" (ngModelChange)="onTemplateChanged()" pInputTextarea rows="60" style="width: 100%;">
-        </textarea>
-    </div>
-    <div class="p-col">
-        <app-code-view [code]="generatedCode"></app-code-view>
-    </div>
-</div>
-
+<app-entity-templates-view [entityId]="entityId"></app-entity-templates-view>
