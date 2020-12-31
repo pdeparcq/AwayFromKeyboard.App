@@ -10,6 +10,10 @@ import { EntityViewComponent } from './entity-view/entity-view.component';
 
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {TabViewModule} from 'primeng/tabview';
+import {AccordionModule} from 'primeng/accordion';
+import {SplitterModule} from 'primeng/splitter';
+import {TableModule} from 'primeng/table';
+import {PanelModule} from 'primeng/panel';
 
 import {afk as AwayFromKeyboard} from '../apis/afkClients'
 import {environment} from '../environments/environment';
@@ -17,6 +21,7 @@ import { CodeViewComponent } from './code-view/code-view.component'
 import { HighlightService } from '../services/highlight.service';
 import { EntityTemplatesViewComponent } from './entity-templates-view/entity-templates-view.component';
 import { EntityCodeViewComponent } from './entity-code-view/entity-code-view.component';
+import { EntityPropertiesViewComponent } from './entity-properties-view/entity-properties-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,8 @@ import { EntityCodeViewComponent } from './entity-code-view/entity-code-view.com
     EntityViewComponent,
     CodeViewComponent,
     EntityTemplatesViewComponent,
-    EntityCodeViewComponent
+    EntityCodeViewComponent,
+    EntityPropertiesViewComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,12 @@ import { EntityCodeViewComponent } from './entity-code-view/entity-code-view.com
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    TabViewModule
+    TabViewModule,
+    AccordionModule,
+    InputTextareaModule,
+    SplitterModule,
+    TableModule,
+    PanelModule
   ],
   providers: [
     {
@@ -41,8 +52,7 @@ import { EntityCodeViewComponent } from './entity-code-view/entity-code-view.com
     },
     HighlightService,
     AwayFromKeyboard.TemplatesClient,
-    AwayFromKeyboard.EntitiesClient,
-    InputTextareaModule
+    AwayFromKeyboard.EntitiesClient
   ],
   bootstrap: [AppComponent]
 })

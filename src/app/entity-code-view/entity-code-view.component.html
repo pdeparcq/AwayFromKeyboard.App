@@ -1,10 +1,13 @@
-<div class="p-grid" *ngIf="templateValue">
-    <div class="p-col">
-        <textarea [(ngModel)]="templateValue" (ngModelChange)="onTemplateChanged()" pInputTextarea rows="60" style="width: 100%;">
-        </textarea>
-    </div>
-    <div class="p-col">
-        <app-code-view [code]="generatedCode"></app-code-view>
-    </div>
-</div>
-
+<p-splitter *ngIf="templateValue">
+    <ng-template>
+        <div class="p-col">
+            <textarea [(ngModel)]="templateValue" (ngModelChange)="onTemplateChanged()" rows="30" style="width: 100%;">
+            </textarea>
+        </div>
+    </ng-template>
+    <ng-template>
+        <div class="p-col">
+            <app-code-view [code]="generatedCode"></app-code-view>
+        </div>
+    </ng-template>
+</p-splitter>

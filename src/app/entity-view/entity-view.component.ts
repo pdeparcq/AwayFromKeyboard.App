@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { afk as AwayFromKeyboard } from '../../apis/afkClients';
 
 @Component({
   selector: 'app-entity-view',
@@ -9,8 +10,11 @@ export class EntityViewComponent implements OnInit{
 
   @Input() entityId? : string;
 
-  constructor(){}
+  entity?: AwayFromKeyboard.EntityDetails
+
+  constructor(private entitiesClient : AwayFromKeyboard.EntitiesClient){}
 
   ngOnInit(): void {
+    this.entitiesClient.getDetails(this.entityId!).subscribe(e => this.entity = e!);
   }
 }

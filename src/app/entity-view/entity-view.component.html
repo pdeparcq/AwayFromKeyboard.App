@@ -1,1 +1,15 @@
-<app-entity-templates-view [entityId]="entityId"></app-entity-templates-view>
+<div *ngIf="entity">
+    <h1>{{entity.name!}}</h1>
+    <p-accordion>
+        <p-accordionTab header="Description">
+            {{entity.description!}}
+        </p-accordionTab>
+        <p-accordionTab header="Properties">
+            <app-entity-properties-view [entity]="entity"></app-entity-properties-view>
+        </p-accordionTab>
+        <p-accordionTab header="Templates">
+            <app-entity-templates-view [entityId]="entityId"></app-entity-templates-view>   
+        </p-accordionTab>
+    </p-accordion>
+</div>
+
