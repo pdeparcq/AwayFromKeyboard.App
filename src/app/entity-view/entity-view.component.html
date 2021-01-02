@@ -4,11 +4,15 @@
         <p-accordionTab header="Description">
             {{entity.description!}}
         </p-accordionTab>
-        <p-accordionTab header="Properties">
-            <app-entity-properties-view [entity]="entity"></app-entity-properties-view>
+        <p-accordionTab header="Properties" [cache]="false">
+            <ng-template pTemplate="content">
+                <app-entity-properties-view [entity]="entity"></app-entity-properties-view>
+            </ng-template>
         </p-accordionTab>
-        <p-accordionTab header="Templates">
-            <app-entity-templates-view [entityId]="entityId"></app-entity-templates-view>   
+        <p-accordionTab header="Templates" [cache]="false">
+            <ng-template pTemplate="content">
+                <app-entity-templates-view [entityId]="entityId"></app-entity-templates-view>
+            </ng-template>
         </p-accordionTab>
     </p-accordion>
 </div>
