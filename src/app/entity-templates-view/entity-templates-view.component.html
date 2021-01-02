@@ -1,5 +1,7 @@
 <p-tabView>
-    <p-tabPanel [header]="item.name!" *ngFor="let item of templates; let i = index" [selected]="i == 0">
-        <app-entity-code-view [entityId]="entityId" [templateId]="item.id!"></app-entity-code-view>
+    <p-tabPanel [header]="item.name!" *ngFor="let item of templates; let i = index" [selected]="i == 0" [cache]="false">
+        <ng-template pTemplate="content">
+            <app-entity-code-view [entityId]="entityId" [templateId]="item.id!"></app-entity-code-view>
+        </ng-template>
     </p-tabPanel>
 </p-tabView>

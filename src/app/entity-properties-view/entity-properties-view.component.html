@@ -1,14 +1,44 @@
-<p-table [value]="entity.properties!">
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+    </ng-template>
+</p-toolbar>
+
+<p-table [value]="entity!.properties!">
     <ng-template pTemplate="header">
         <tr>
             <th>Name</th>
             <th>Type</th>
+            <th>Description</th>
+            <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-property>
         <tr>
             <td>{{property.name!}}</td>
-            <td>{{property.systemType ? property.systemType! : property.valuetype!.name!}}</td>
+            <td>{{property.systemType ? property.systemType! : property.valuetype?.name!}}</td>
+            <td>{{property.description}}</td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProperty(property)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProperty(property)"></button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
+
+<p-dialog header="Add Property" [(visible)]="addProperty" [style]="{width: '450px'}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="addProperty!.name" required autofocus />
+        </div>
+        <div class="p-field">
+            <label for="description">Description</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="addProperty!.description" required rows="3" cols="20"></textarea>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProperty()"></button>
+    </ng-template>
+</p-dialog>

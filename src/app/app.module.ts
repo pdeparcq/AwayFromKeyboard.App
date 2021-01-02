@@ -9,11 +9,15 @@ import { AppComponent } from './app.component';
 import { EntityViewComponent } from './entity-view/entity-view.component';
 
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputTextModule} from 'primeng/inputtext';
 import {TabViewModule} from 'primeng/tabview';
 import {AccordionModule} from 'primeng/accordion';
 import {SplitterModule} from 'primeng/splitter';
 import {TableModule} from 'primeng/table';
 import {PanelModule} from 'primeng/panel';
+import {ButtonModule} from 'primeng/button';
+import {ToolbarModule} from 'primeng/toolbar';
+import {DialogModule} from 'primeng/dialog';
 
 import {afk as AwayFromKeyboard} from '../apis/afkClients'
 import {environment} from '../environments/environment';
@@ -40,10 +44,14 @@ import { EntityPropertiesViewComponent } from './entity-properties-view/entity-p
     FormsModule,
     TabViewModule,
     AccordionModule,
+    InputTextModule,
     InputTextareaModule,
     SplitterModule,
     TableModule,
-    PanelModule
+    PanelModule,
+    ButtonModule,
+    ToolbarModule,
+    DialogModule
   ],
   providers: [
     {
