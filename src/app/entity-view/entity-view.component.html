@@ -9,6 +9,11 @@
                 <app-entity-properties-view [entity]="entity"></app-entity-properties-view>
             </ng-template>
         </p-accordionTab>
+        <p-accordionTab header="Relations" [cache]="false">
+            <ng-template pTemplate="content">
+                <app-entity-relations-view [entity]="entity"></app-entity-relations-view>
+            </ng-template>
+        </p-accordionTab>
         <p-accordionTab header="Templates" [cache]="false">
             <ng-template pTemplate="content">
                 <app-entity-templates-view [entityId]="entityId"></app-entity-templates-view>

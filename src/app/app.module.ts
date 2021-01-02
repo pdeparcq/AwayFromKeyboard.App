@@ -18,6 +18,7 @@ import {PanelModule} from 'primeng/panel';
 import {ButtonModule} from 'primeng/button';
 import {ToolbarModule} from 'primeng/toolbar';
 import {DialogModule} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
 
 import {afk as AwayFromKeyboard} from '../apis/afkClients'
 import {environment} from '../environments/environment';
@@ -26,6 +27,7 @@ import { HighlightService } from '../services/highlight.service';
 import { EntityTemplatesViewComponent } from './entity-templates-view/entity-templates-view.component';
 import { EntityCodeViewComponent } from './entity-code-view/entity-code-view.component';
 import { EntityPropertiesViewComponent } from './entity-properties-view/entity-properties-view.component';
+import { EntityRelationsViewComponent } from './entity-relations-view/entity-relations-view.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { EntityPropertiesViewComponent } from './entity-properties-view/entity-p
     CodeViewComponent,
     EntityTemplatesViewComponent,
     EntityCodeViewComponent,
-    EntityPropertiesViewComponent
+    EntityPropertiesViewComponent,
+    EntityRelationsViewComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { EntityPropertiesViewComponent } from './entity-properties-view/entity-p
     PanelModule,
     ButtonModule,
     ToolbarModule,
-    DialogModule
+    DialogModule,
+    DropdownModule
   ],
   providers: [
     {
@@ -60,6 +64,7 @@ import { EntityPropertiesViewComponent } from './entity-properties-view/entity-p
     },
     HighlightService,
     AwayFromKeyboard.TemplatesClient,
+    AwayFromKeyboard.ModulesClient,
     AwayFromKeyboard.EntitiesClient
   ],
   bootstrap: [AppComponent]

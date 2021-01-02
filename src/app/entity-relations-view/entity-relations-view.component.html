@@ -1,0 +1,54 @@
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+    </ng-template>
+</p-toolbar>
+
+<p-table [value]="entity!.relations!">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Multiplicity</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-relation>
+        <tr>
+            <td>{{relation.multiplicity!}}</td>
+            <td>{{relation.name!}}</td>
+            <td>{{relation.toEntity.name}}</td>
+            <td>{{relation.description}}</td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editRelation(relation)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteRelation(relation)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog header="Add Relation" [(visible)]="addRelation" [style]="{width: '450px'}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="addRelation!.name" required autofocus />
+        </div>
+        <div class="p-field">
+            <label for="multiplicity">Multiplicity</label>
+            <p-dropdown id="multiplicity" [options]="multiplicities" [(ngModel)]="addRelation!.multiplicity" optionLabel="label" optionValue="value"></p-dropdown>
+        </div>
+        <div class="p-field">
+            <label for="toEntity">ToEntity</label>
+            <p-dropdown id="toEntity" [options]="entities" [(ngModel)]="addRelation!.toEntityId" optionLabel="name" optionValue="id"></p-dropdown>
+        </div>
+        <div class="p-field">
+            <label for="description">Description</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="addRelation!.description" required rows="3" cols="20"></textarea>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveRelation()"></button>
+    </ng-template>
+</p-dialog>
