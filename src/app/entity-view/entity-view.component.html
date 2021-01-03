@@ -1,15 +1,15 @@
 <div *ngIf="entity">
     <h1>Entity - {{entity.name!}}</h1>
-    <p-accordion>
-        <p-accordionTab header="Description">
+    <p-accordion [multiple]="true">
+        <p-accordionTab header="Description" [selected]="true">
             {{entity.description!}}
         </p-accordionTab>
-        <p-accordionTab header="Properties" [cache]="false">
+        <p-accordionTab header="Properties" [cache]="false" [selected]="true">
             <ng-template pTemplate="content">
                 <app-entity-properties-view [entity]="entity"></app-entity-properties-view>
             </ng-template>
         </p-accordionTab>
-        <p-accordionTab header="Relations" [cache]="false">
+        <p-accordionTab header="Relations" [cache]="false" [selected]="true">
             <ng-template pTemplate="content">
                 <app-entity-relations-view [entity]="entity"></app-entity-relations-view>
             </ng-template>
